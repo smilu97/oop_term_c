@@ -1,3 +1,4 @@
+#include <cstdio>
 #include <vector>
 #include <map>
 #include <algorithm>
@@ -17,16 +18,19 @@ public :
 	// CREATE
 	void insert(string name, string phoneNumber);
 	// READ
-	unit* at(int idx);
 	unit* select(int id);
 	unit* selectByName(string name);
 	unit* selectByNumb(string numb);
 	// UPDATE
 	// DELETE
-	void delete(int id);
+	void deleteById(int id);
 	void deleteByName(string name);
 	void deleteByNumb(string phoneNumber);
 	// FILE
 	string toString();
 	void fromString(string raw);
+	// ETC
+	void exceptUnit(unit* u);
+	void save(string path);
+	void load(string path);
 }

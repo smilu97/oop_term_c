@@ -70,3 +70,20 @@ void manager::exceptUnit(unit* u) {
 	key_numb.erase(key_numb.find(numb));
 	delete u;
 }
+
+void manager::save(string path) {
+	string data = toString();
+	fd = fopen(path.c_str(), 'wb')
+	fprintf(fd, "%s", data.c_str());
+	fclose(fd);
+}
+void manager::load(string path) {
+	string data;
+	char buffer[1024];
+	fd = fopen(path.c_str(), 'rb')
+	while(~fscanf(fd, "%1024s", buffer)) {
+		data.concat(buffer);
+	}
+	fclose(fd);
+	fromString(data);
+}
