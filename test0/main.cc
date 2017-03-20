@@ -3,6 +3,5 @@
 
 int main(void)
 {
-	manager m;
-
+	manager m("Test Manager");
 }

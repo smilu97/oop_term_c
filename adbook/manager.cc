@@ -1,8 +1,10 @@
 #include "headers/manager.h"
 
-manager::manager() {
+manager::manager(string _name) {
 	this->maxId = 0;
+	this->name = _name;
 }
+string manager::getName() { return this->name; }
 
 void manager::insert(string name, string phoneNumber) {
 	int id = maxId++;

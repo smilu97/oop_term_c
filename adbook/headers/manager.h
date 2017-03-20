@@ -10,12 +10,14 @@ using namespace std;
 
 class manager {
 protected :
+	string name;
 	unsigned long long maxId;
 	map<int, unit*>   key_id;
 	map<string, unit*, stringComp> key_name;
 	map<string, unit*, stringComp> key_numb;
 public :
-	manager();
+	manager(string _name);
+	string getName();
 	// CREATE
 	void insert(string name, string phoneNumber);
 	// READ
