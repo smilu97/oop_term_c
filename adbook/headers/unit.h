@@ -14,4 +14,5 @@ public :
 	void setName(string _name);
 	string getPhoneNumber();
 	void setPhoneNumber(string _phoneNumber);
+	string toString();
 };

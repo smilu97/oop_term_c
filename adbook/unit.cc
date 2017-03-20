@@ -9,4 +9,5 @@ void unit::setPhoneNumber(string _phoneNumber) { this->phoneNumber = _phoneNumbe
 string unit::toString() {
 	string res;
 	res = name + '\x00' + phoneNumber + '\x00';
+	return res;
 }

@@ -44,12 +44,12 @@ void manager::deleteByNumb(string phoneNumber) {
 string manager::toString() {
 	string res;
 	for(auto it=key_id.begin(); it != key_id.end(); ++it) {
-		res.append(it->second.toString());
+		res.append(it->second->toString());
 	}
 	return res;
 }
 void manager::fromString(string raw) {
-	char* cstr = raw.c_str();
+	const char* cstr = raw.c_str();
 	int cursor = 0;
 	int length = raw.length();
 	while (cursor < length) {
@@ -73,16 +73,16 @@ void manager::exceptUnit(unit* u) {
 
 void manager::save(string path) {
 	string data = toString();
-	fd = fopen(path.c_str(), 'wb')
+	FILE* fd = fopen(path.c_str(), "wb");
 	fprintf(fd, "%s", data.c_str());
 	fclose(fd);
 }
 void manager::load(string path) {
 	string data;
 	char buffer[1024];
-	fd = fopen(path.c_str(), 'rb')
+	FILE* fd = fopen(path.c_str(), "rb");
 	while(~fscanf(fd, "%1024s", buffer)) {
-		data.concat(buffer);
+		data.append(buffer);
 	}
 	fclose(fd);
 	fromString(data);

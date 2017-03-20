@@ -1,10 +1,10 @@
 #include <cstdio>
 #include <vector>
+#include <string>
 #include <map>
 #include <algorithm>
 #include "unit.h"
 #include "comparator.h"
-typedef priority_queue PQ;
 using namespace std;
 
 class manager {
@@ -33,4 +33,4 @@ public :
 	void exceptUnit(unit* u);
 	void save(string path);
 	void load(string path);
-}
+};
