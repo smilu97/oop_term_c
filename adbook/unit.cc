@@ -8,6 +8,10 @@ string unit::getPhoneNumber() { return this->phoneNumber; }
 void unit::setPhoneNumber(string _phoneNumber) { this->phoneNumber = _phoneNumber; }
 string unit::toString() {
 	string res;
-	res = name + '\x00' + phoneNumber + '\x00';
+	res = name + "," + phoneNumber + "\n";
 	return res;
+}
+void unit::print() {
+	printf("-----------------------\nname:%s\nnumber:%s\n",
+		name.c_str(), phoneNumber.c_str());
 }

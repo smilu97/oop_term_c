@@ -4,6 +4,11 @@ manager::manager(string _name) {
 	this->maxId = 0;
 	this->name = _name;
 }
+manager::~manager() {
+	for(auto it = key_id.begin(); it != key_id.end(); ++it) {
+		delete (it->second);
+	}
+}
 string manager::getName() { return this->name; }
 
 void manager::insert(string name, string phoneNumber) {
@@ -53,12 +58,18 @@ string manager::toString() {
 void manager::fromString(string raw) {
 	const char* cstr = raw.c_str();
 	int cursor = 0;
+	int cursor2 = 0;
 	int length = raw.length();
 	while (cursor < length) {
-		string name(cstr+cursor);
-		cursor += name.length() + 1;
-		string numb(cstr+cursor);
-		cursor += numb.length() + 1;
+		string name, numb;
+		for(cursor2=cursor; cursor2<length && 
+			cstr[cursor2]!=','; ++cursor2) {
+			name += cstr[cursor2];
+		} cursor = cursor2+1;
+		for(cursor2=cursor; cursor2<length &&
+			cstr[cursor2]!='\n'; ++cursor2) {
+			numb += cstr[cursor2];
+		} cursor = cursor2+1;
 		insert(name, numb);
 	}
 }
@@ -85,7 +96,20 @@ void manager::load(string path) {
 	FILE* fd = fopen(path.c_str(), "rb");
 	while(~fscanf(fd, "%1024s", buffer)) {
 		data.append(buffer);
+		data.append("\n");
 	}
 	fclose(fd);
 	fromString(data);
+}
+void manager::save() {
+	save(name+".dat");
+}
+void manager::load() {
+	load(name+".dat");
+}
+map<int, unit*>::iterator manager::begin() {
+	return key_id.begin();
+}
+map<int, unit*>::iterator manager::end() {
+	return key_id.end();
 }

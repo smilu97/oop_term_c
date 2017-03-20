@@ -16,4 +16,5 @@ public :
 	string getPhoneNumber();
 	void setPhoneNumber(string _phoneNumber);
 	string toString();
+	void print();
 };

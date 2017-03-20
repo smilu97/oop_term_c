@@ -17,6 +17,7 @@ protected :
 	map<string, unit*, stringComp> key_numb;
 public :
 	manager(string _name);
+	~manager();
 	string getName();
 	// CREATE
 	void insert(string name, string phoneNumber);
@@ -36,4 +37,8 @@ public :
 	void exceptUnit(unit* u);
 	void save(string path);
 	void load(string path);
+	void save();
+	void load();
+	map<int, unit*>::iterator begin();
+	map<int, unit*>::iterator end();
 };
