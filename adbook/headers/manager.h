@@ -1,5 +1,6 @@
 #include <vector>
-#include <priority_queue>
+#include <map>
+#include <algorithm>
 #include "unit.h"
 #include "comparator.h"
 typedef priority_queue PQ;
@@ -7,15 +8,17 @@ using namespace std;
 
 class manager {
 protected :
-	vector<unit*> units;
-	PQ<unit*, unitNameComp> key_name;
-	PQ<unit*, unitNumbComp> key_numb;
+	unsigned long long maxId;
+	map<int, unit*>   key_id;
+	map<string, unit*, stringComp> key_name;
+	map<string, unit*, stringComp> key_numb;
 public :
+	manager();
 	// CREATE
 	void insert(string name, string phoneNumber);
 	// READ
 	unit* at(int idx);
-	unit* select(int idx);
+	unit* select(int id);
 	unit* selectByName(string name);
 	unit* selectByNumb(string numb);
 	// UPDATE

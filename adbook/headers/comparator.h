@@ -1,10 +1,6 @@
 #include <cstring>
 
-class unitNameComp {
+class stringComp {
 public :
-	bool operator()(unit* a, unit* b);
-};
-class unitNumbComp {
-public :
-	bool operator()(unit* a, unit* b);
+	bool operator()(string a, string b);
 };
