@@ -41,4 +41,5 @@ public :
 	void load();
 	map<int, unit*>::iterator begin();
 	map<int, unit*>::iterator end();
+    bool compare(unit& a, unit& b);
 };

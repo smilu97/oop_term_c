@@ -113,3 +113,6 @@ map<int, unit*>::iterator manager::begin() {
 map<int, unit*>::iterator manager::end() {
 	return key_id.end();
 }
+bool manager::compare(unit& a, unit& b) {
+    return strcmp(a->getName(), b->getName());
+}
