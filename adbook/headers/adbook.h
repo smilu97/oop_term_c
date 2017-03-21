@@ -1,3 +1,5 @@
 #include "comparator.h"
 #include "addressBook.h"
 #include "unit.h"
+#include "phone.h"
+#include "smsHistory.h"

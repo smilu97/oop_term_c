@@ -1,9 +1,9 @@
 #pragma once
-#include "manager.h"
+#include "addressBook.h"
 
 class phone {
 protected :
-	manager address;
+	addressBook address;
 public:
 	phone(string name): address(name) {}
 	void callReceiveCallback (string senderPhoneNum);

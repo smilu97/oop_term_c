@@ -79,8 +79,22 @@ void addressBook::exceptUnit(unit* u) {
 	string name = u->getName();
 	string numb = u->getPhoneNumber();
 	key_id.erase(key_id.find(id));
-	key_name.erase(key_name.find(name));
-	key_numb.erase(key_numb.find(numb));
+	for(auto it=key_name.find(name);
+		it != key_name.end() && it->second->getName()==name;
+		++it) {
+		if(it->second->getId() == id) {
+			key_name.erase(it);
+			break;
+		}
+	}
+	for(auto it=key_numb.find(numb);
+		it != key_numb.end() && it->second->getPhoneNumber()==numb;
+		++it) {
+		if(it->second->getId() == id) {
+			key_numb.erase(it);
+			break;
+		}
+	}
 	delete u;
 }
 
