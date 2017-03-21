@@ -15,8 +15,8 @@ void manager::insert(string name, string phoneNumber) {
 	int id = maxId++;
 	unit* u = new unit(id, name, phoneNumber);
 	key_id[id] = u;
-	key_name[name] = u;
-	key_numb[phoneNumber] = u;
+	key_name.insert(make_pair(name, u));
+	key_numb.insert(make_pair(phoneNumber, u));
 }
 unit* manager::select(int id) {
 	auto it = key_id.find(id);
@@ -107,12 +107,28 @@ void manager::save() {
 void manager::load() {
 	load(name+".dat");
 }
+unsigned int manager::size() {
+	return key_id.size();
+}
 map<int, unit*>::iterator manager::begin() {
 	return key_id.begin();
 }
 map<int, unit*>::iterator manager::end() {
 	return key_id.end();
 }
+MSUS::iterator manager::begin_name() {
+	return key_name.begin();
+}
+MSUS::iterator manager::end_name() {
+	return key_name.end();
+}
+MSUS::iterator manager::begin_numb() {
+	return key_numb.begin();
+}
+MSUS::iterator manager::end_numb() {
+	return key_numb.end();
+}
+
 bool manager::compare(unit& a, unit& b) {
-    return strcmp(a->getName(), b->getName());
+	return a.getName().compare(b.getName());
 }

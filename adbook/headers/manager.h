@@ -8,13 +8,15 @@
 #include "comparator.h"
 using namespace std;
 
+typedef multimap<string, unit*, stringComp> MSUS;
+
 class manager {
 protected :
 	string name;
 	unsigned long long maxId;
 	map<int, unit*>   key_id;
-	map<string, unit*, stringComp> key_name;
-	map<string, unit*, stringComp> key_numb;
+	MSUS key_name;
+	MSUS key_numb;
 public :
 	manager(string _name);
 	~manager();
@@ -39,7 +41,12 @@ public :
 	void load(string path);
 	void save();
 	void load();
+	unsigned int size();
 	map<int, unit*>::iterator begin();
 	map<int, unit*>::iterator end();
+	MSUS::iterator begin_name();
+	MSUS::iterator end_name();
+	MSUS::iterator begin_numb();
+	MSUS::iterator end_numb();
     bool compare(unit& a, unit& b);
 };
