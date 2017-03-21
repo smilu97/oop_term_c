@@ -1,61 +1,61 @@
-#include "headers/manager.h"
+#include "headers/addressBook.h"
 
-manager::manager(string _name) {
+addressBook::addressBook(string _name) {
 	this->maxId = 0;
 	this->name = _name;
 }
-manager::~manager() {
+addressBook::~addressBook() {
 	for(auto it = key_id.begin(); it != key_id.end(); ++it) {
 		delete (it->second);
 	}
 }
-string manager::getName() { return this->name; }
+string addressBook::getName() { return this->name; }
 
-void manager::insert(string name, string phoneNumber) {
+void addressBook::insert(string name, string phoneNumber) {
 	int id = maxId++;
 	unit* u = new unit(id, name, phoneNumber);
 	key_id[id] = u;
 	key_name.insert(make_pair(name, u));
 	key_numb.insert(make_pair(phoneNumber, u));
 }
-unit* manager::select(int id) {
+unit* addressBook::select(int id) {
 	auto it = key_id.find(id);
 	if (it == key_id.end()) return NULL;
 	return it->second;
 }
-unit* manager::selectByName(string name) {
+unit* addressBook::selectByName(string name) {
 	auto it = key_name.find(name);
 	if (it == key_name.end()) return NULL;
 	return it->second;
 }
-unit* manager::selectByNumb(string numb) {
+unit* addressBook::selectByNumb(string numb) {
 	auto it = key_numb.find(numb);
 	if (it == key_numb.end()) return NULL;
 	return it->second;
 }
-void manager::deleteById(int id) {
+void addressBook::deleteById(int id) {
 	unit* u = select(id);
 	if (u == NULL) return;
 	exceptUnit(u);
 }
-void manager::deleteByName(string name) {
+void addressBook::deleteByName(string name) {
 	unit* u = selectByName(name);
 	if (u == NULL) return;
 	exceptUnit(u);
 }
-void manager::deleteByNumb(string phoneNumber) {
+void addressBook::deleteByNumb(string phoneNumber) {
 	unit* u = selectByNumb(phoneNumber);
 	if (u == NULL) return;
 	exceptUnit(u);
 }
-string manager::toString() {
+string addressBook::toString() {
 	string res;
 	for(auto it=key_id.begin(); it != key_id.end(); ++it) {
 		res.append(it->second->toString());
 	}
 	return res;
 }
-void manager::fromString(string raw) {
+void addressBook::fromString(string raw) {
 	const char* cstr = raw.c_str();
 	int cursor = 0;
 	int cursor2 = 0;
@@ -74,7 +74,7 @@ void manager::fromString(string raw) {
 	}
 }
 
-void manager::exceptUnit(unit* u) {
+void addressBook::exceptUnit(unit* u) {
 	int id = u->getId();
 	string name = u->getName();
 	string numb = u->getPhoneNumber();
@@ -84,13 +84,13 @@ void manager::exceptUnit(unit* u) {
 	delete u;
 }
 
-void manager::save(string path) {
+void addressBook::save(string path) {
 	string data = toString();
 	FILE* fd = fopen(path.c_str(), "wb");
 	fprintf(fd, "%s", data.c_str());
 	fclose(fd);
 }
-void manager::load(string path) {
+void addressBook::load(string path) {
 	string data;
 	char buffer[1024];
 	FILE* fd = fopen(path.c_str(), "rb");
@@ -101,34 +101,34 @@ void manager::load(string path) {
 	fclose(fd);
 	fromString(data);
 }
-void manager::save() {
+void addressBook::save() {
 	save(name+".dat");
 }
-void manager::load() {
+void addressBook::load() {
 	load(name+".dat");
 }
-unsigned int manager::size() {
+unsigned int addressBook::size() {
 	return key_id.size();
 }
-map<int, unit*>::iterator manager::begin() {
+map<int, unit*>::iterator addressBook::begin() {
 	return key_id.begin();
 }
-map<int, unit*>::iterator manager::end() {
+map<int, unit*>::iterator addressBook::end() {
 	return key_id.end();
 }
-MSUS::iterator manager::begin_name() {
+MSUS::iterator addressBook::begin_name() {
 	return key_name.begin();
 }
-MSUS::iterator manager::end_name() {
+MSUS::iterator addressBook::end_name() {
 	return key_name.end();
 }
-MSUS::iterator manager::begin_numb() {
+MSUS::iterator addressBook::begin_numb() {
 	return key_numb.begin();
 }
-MSUS::iterator manager::end_numb() {
+MSUS::iterator addressBook::end_numb() {
 	return key_numb.end();
 }
 
-bool manager::compare(unit& a, unit& b) {
+bool addressBook::compare(unit& a, unit& b) {
 	return a.getName().compare(b.getName());
 }

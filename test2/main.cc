@@ -4,7 +4,7 @@
 #include "../adbook/headers/adbook.h"
 
 bool test() {
-    manager m("man");
+    addressBook m("man");
     char buf[65536];
     
     srand(time(0));

@@ -10,7 +10,7 @@ using namespace std;
 
 typedef multimap<string, unit*, stringComp> MSUS;
 
-class manager {
+class addressBook {
 protected :
 	string name;
 	unsigned long long maxId;
@@ -18,8 +18,8 @@ protected :
 	MSUS key_name;
 	MSUS key_numb;
 public :
-	manager(string _name);
-	~manager();
+	addressBook(string _name);
+	~addressBook();
 	string getName();
 	// CREATE
 	void insert(string name, string phoneNumber);

@@ -3,5 +3,5 @@
 
 int main(void)
 {
-	manager m("Test Manager");
+	addressBook m("Test Manager");
 }
