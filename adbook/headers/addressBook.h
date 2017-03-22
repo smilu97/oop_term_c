@@ -9,14 +9,16 @@
 using namespace std;
 
 typedef multimap<string, unit*, stringComp> MSUS;
+typedef multimap<time_t, unit*> MTU;
 
 class addressBook {
 protected :
 	string name;
 	unsigned long long maxId;
 	map<int, unit*>   key_id;
-	MSUS key_name;
-	MSUS key_numb;
+	MSUS key_name; // Index of name
+	MSUS key_numb; // Index of phone number
+	MTU key_smst; // Index of latest SMS Time
 public :
 	addressBook(string _name);
 	~addressBook();
@@ -48,5 +50,7 @@ public :
 	MSUS::iterator end_name();
 	MSUS::iterator begin_numb();
 	MSUS::iterator end_numb();
+	MTU::iterator  begin_smst();
+	MTU::iterator  end_smst();
     bool compare(unit& a, unit& b);
 };

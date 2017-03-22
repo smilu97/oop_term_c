@@ -14,9 +14,11 @@ string addressBook::getName() { return this->name; }
 void addressBook::insert(string name, string phoneNumber) {
 	int id = maxId++;
 	unit* u = new unit(id, name, phoneNumber);
+	time_t time = u->getLatestSms();
 	key_id[id] = u;
 	key_name.insert(make_pair(name, u));
 	key_numb.insert(make_pair(phoneNumber, u));
+	key_smst.insert(make_pair(time, u));
 }
 unit* addressBook::select(int id) {
 	auto it = key_id.find(id);
@@ -99,9 +101,8 @@ void addressBook::exceptUnit(unit* u) {
 }
 
 void addressBook::save(string path) {
-	string data = toString();
 	FILE* fd = fopen(path.c_str(), "wb");
-	fprintf(fd, "%s", data.c_str());
+	fprintf(fd, "%s", toString().c_str());
 	fclose(fd);
 }
 void addressBook::load(string path) {
@@ -141,6 +142,12 @@ MSUS::iterator addressBook::begin_numb() {
 }
 MSUS::iterator addressBook::end_numb() {
 	return key_numb.end();
+}
+MTU::iterator  addressBook::begin_smst() {
+	return key_smst.begin();
+}
+MTU::iterator  addressBook::end_smst() {
+	return key_smst.end();
 }
 
 bool addressBook::compare(unit& a, unit& b) {

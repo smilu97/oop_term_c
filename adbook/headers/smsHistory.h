@@ -4,13 +4,13 @@
 #include <map>
 using namespace std;
 
-class history {
+class sHistory {
 private :
 	int id;
 	string from;
 	string content;
 public :
-	history(int _id, string _from, string _content):
+	sHistory(int _id, string _from, string _content):
 		id(_id), from(_from), content(_content) {}
 	int    getId();
 	string getFrom();
@@ -20,22 +20,27 @@ public :
 	void   setId(int _id);
 };
 
-typedef multimap<string, history*> historyIndex_from;
-typedef multimap<int, history*>    historyIndex_id;
+typedef multimap<string, sHistory*> sHistoryIndex_from;
+typedef multimap<int, sHistory*>    sHistoryIndex_id;
 
 class smsHistory {
 private :
 	int maxId;
-	historyIndex_id   key_id;
-	historyIndex_from key_from;
+	sHistoryIndex_id   key_id;
+	sHistoryIndex_from key_from;
 public :
 	smsHistory();
 	~smsHistory();
 	void insert(string from, string content);
-	void except(history* h);
+	void except(sHistory* h);
+	void clear();
 	int size();
-	historyIndex_id::iterator begin();
-	historyIndex_id::iterator end();
-	historyIndex_from::iterator begin_from();
-	historyIndex_from::iterator end_from();	
+	sHistoryIndex_id::iterator begin();
+	sHistoryIndex_id::iterator end();
+	sHistoryIndex_from::iterator begin_from();
+	sHistoryIndex_from::iterator end_from();	
+	string toString();
+	void fromString(string data);
+	void save(string path);
+	void load(string path);
 };
