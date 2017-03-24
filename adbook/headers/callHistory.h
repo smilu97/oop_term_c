@@ -16,6 +16,7 @@ public :
 	string getFrom();
 	void   setFrom(string _from);
 	void   setId(int _id);
+	void   print();
 };
 
 typedef multimap<string, cHistory*> cHistoryIndex_from;
@@ -32,6 +33,7 @@ public :
 	void insert(string from);
 	void except(cHistory* h);
 	int size();
+	void clear();
 	cHistoryIndex_id::iterator begin();
 	cHistoryIndex_id::iterator end();
 	cHistoryIndex_from::iterator begin_from();

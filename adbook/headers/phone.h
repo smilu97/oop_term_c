@@ -17,4 +17,8 @@ public:
 	void callReceiveCallback(string from);
 	void smsReceiveCallback (string senderPhoneNum, string content);
 	void createAddress(string name, string numb);
+	void printAddress();
+	void save(string path);
+	void load(string path);
+	void clear();
 };

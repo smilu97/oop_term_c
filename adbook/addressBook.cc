@@ -5,9 +5,16 @@ addressBook::addressBook(string _name) {
 	this->name = _name;
 }
 addressBook::~addressBook() {
+	clear();
+}
+void addressBook::clear() {
 	for(auto it = key_id.begin(); it != key_id.end(); ++it) {
 		delete (it->second);
 	}
+	key_id.clear();
+	key_name.clear();
+	key_numb.clear();
+	key_smst.clear();
 }
 string addressBook::getName() { return this->name; }
 
@@ -115,12 +122,6 @@ void addressBook::load(string path) {
 	}
 	fclose(fd);
 	fromString(data);
-}
-void addressBook::save() {
-	save(name+".dat");
-}
-void addressBook::load() {
-	load(name+".dat");
 }
 unsigned int addressBook::size() {
 	return key_id.size();

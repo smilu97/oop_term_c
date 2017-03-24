@@ -6,6 +6,10 @@ string sHistory::getContent() { return content; }
 void   sHistory::setFrom(string _from) { from=_from; }
 void   sHistory::setContent(string _content) { content=_content; }
 void   sHistory::setId(int _id) { id = _id; }
+void sHistory::print()
+{
+	printf("-----------------------\nfrom:%s\ncontent:%s\n",from.c_str(), content.c_str());
+}
 smsHistory::smsHistory() {
 	maxId = 0;
 }
@@ -25,6 +29,9 @@ sHistoryIndex_id::iterator smsHistory::begin() { return key_id.begin(); }
 sHistoryIndex_id::iterator smsHistory::end() { return key_id.end(); }
 sHistoryIndex_from::iterator smsHistory::begin_from() { return key_from.begin(); }
 sHistoryIndex_from::iterator smsHistory::end_from() { return key_from.end(); }
+sHistoryIndex_from::iterator smsHistory::find_from(string from) {
+	return key_from.find(from);
+}
 
 void smsHistory::insert(string from, string content) {
 	int id = maxId++;

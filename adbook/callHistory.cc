@@ -4,13 +4,22 @@ int    cHistory::getId() { return id; }
 string cHistory::getFrom() { return from; }
 void   cHistory::setFrom(string _from) { from=_from; }
 void   cHistory::setId(int _id) { id = _id; }
+void cHistory::print()
+{
+	printf("-----------------------\nfrom:%s\n", from.c_str());
+}
 callHistory::callHistory() {
 	maxId = 0;
 }
 callHistory::~callHistory() {
+	clear();
+}
+void callHistory::clear() {
 	for(auto it = key_id.begin(); it != key_id.end(); ++it) {
 		delete it->second;
 	}
+	key_from.clear();
+	key_id.clear();
 }
 int callHistory::size() { return key_id.size(); }
 

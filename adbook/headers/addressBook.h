@@ -41,8 +41,7 @@ public :
 	void exceptUnit(unit* u);
 	void save(string path);
 	void load(string path);
-	void save();
-	void load();
+	void clear();
 	unsigned int size();
 	map<int, unit*>::iterator begin();
 	map<int, unit*>::iterator end();
