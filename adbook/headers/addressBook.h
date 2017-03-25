@@ -30,10 +30,13 @@ public :
 	unit* selectByName(string name);
 	unit* selectByNumb(string numb);
 	// UPDATE
+	bool updateName(int id, string _name);
+	bool updateNumb(int id, string _numb);
+	bool updateLatestSms(int id, time_t _latestSms);
 	// DELETE
-	void deleteById(int id);
-	void deleteByName(string name);
-	void deleteByNumb(string phoneNumber);
+	bool deleteById(int id);
+	bool deleteByName(string name);
+	bool deleteByNumb(string phoneNumber);
 	// FILE
 	string toString();
 	void fromString(string raw);

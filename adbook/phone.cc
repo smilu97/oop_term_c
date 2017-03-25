@@ -8,13 +8,13 @@ void phone::smsReceiveCallback(string senderPhoneNum, string content) {
 	unit* person = address.selectByNumb(senderPhoneNum);
 	if (person != NULL) {
 		time_t time;
-		person->setLatestSms(time);
+		address.updateLatestSms(person->getId(), time);
 	}
 	else {
 		address.insert(senderPhoneNum, senderPhoneNum);
 		unit* newPerson = address.selectByNumb(senderPhoneNum);
 		time_t time;
-		newPerson->setLatestSms(time);
+		address.updateLatestSms(newPerson->getId(), time);
 	}
 }
 void phone::createAddress(string name, string numb) {

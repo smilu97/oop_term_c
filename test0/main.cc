@@ -68,6 +68,7 @@ bool test4(phone &p)
 	p.save("save");
 	printf("Modify \"save\" file in same folder and press any key to continue\n");
 	getchar();
+	p.clear();
 	p.load("save");
 	for(auto it = p.address.begin(); it != p.address.end(); ++it) {
 		it->second->print();
@@ -119,15 +120,39 @@ bool test7(phone &p)
 	for(int i=1;i<idx;++i) ++u_it;
 	unit* u = u_it->second;
 	string from = u->getPhoneNumber();
+
+	printf("**************CALL HISTORY of %s*************************\n", u->getName().c_str());
 	for(auto it = p.sms.find_from(from); it->second->getFrom()==from; ++it) {
 		it->second->print();
 	}
 	return true;
 }
+bool test8(phone &p)
+{
+	int i=0;
+	for(auto it = p.address.begin(); it != p.address.end(); ++it,++i) {
+		if (i>=15) break;
+		p.callReceiveCallback(it->second->getPhoneNumber());
+	}
+	for(int i=0;i<5;++i) {
+		p.callReceiveCallback(createRandomString(11,'0','9'));
+	}
+	printf("**************CALL HISTORY*************************\n");
+	for(auto it = p.call.begin(); it != p.call.end(); ++it) {
+		it->second->print();
+		unit* sender = p.address.selectByNumb(it->second->getFrom());
+		if (sender != NULL) {
+			printf("sender: %s\n", sender->getName().c_str());
+		}
+	}
+	p.save("save");
+	return true;
+}
 int main(void)
 {
 	phone p("TESTER", "01012345678"); // create instance
-	if(!test1(p) || !test2(p) || !test3(p)) {
+	if(!test1(p) || !test2(p) || !test3(p) || !test4(p) || !test5(p) ||
+		!test6(p) || !test7(p) || !test8(p)) {
 		printf("Fail\n");
 	}
 	else {

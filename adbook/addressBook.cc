@@ -42,20 +42,71 @@ unit* addressBook::selectByNumb(string numb) {
 	if (it == key_numb.end()) return NULL;
 	return it->second;
 }
-void addressBook::deleteById(int id) {
+bool addressBook::updateName(int id, string _name)
+{
 	unit* u = select(id);
-	if (u == NULL) return;
-	exceptUnit(u);
+	if (u == NULL) return false;
+	string name = u->getName();
+	for(auto it = key_name.find(name); it != key_name.end() && 
+		it->second->getName() == name; ++it) {
+		if (it->second->getId() == id) {
+			key_name.erase(it);
+			break;
+		}
+	}
+	u->setName(_name);
+	key_name.insert(make_pair(_name, u));
+	return true;
 }
-void addressBook::deleteByName(string name) {
+bool addressBook::updateNumb(int id, string _numb)
+{
+	unit* u = select(id);
+	if (u == NULL) return false;
+	string numb = u->getPhoneNumber();
+	for(auto it = key_numb.find(numb); it != key_numb.end() &&
+		it->second->getPhoneNumber() == numb; ++it) {
+		if (it->second->getId() == id) {
+			key_numb.erase(it);
+			break;
+		}
+	}
+	u->setPhoneNumber(_numb);
+	key_numb.insert(make_pair(_numb, u));
+	return true;
+}
+bool addressBook::updateLatestSms(int id, time_t _latestSms)
+{
+	unit* u = select(id);
+	if (u == NULL) return false;
+	time_t latestSms = u->getLatestSms();
+	for(auto it = key_smst.find(_latestSms); it != key_smst.end() &&
+		it->second->getLatestSms() == latestSms; ++it) {
+		if (it->second->getId() == id) {
+			key_smst.erase(it);
+			break;
+		}
+	}
+	u->setLatestSms(_latestSms);
+	key_smst.insert(make_pair(_latestSms, u));
+	return true;
+}
+bool addressBook::deleteById(int id) {
+	unit* u = select(id);
+	if (u == NULL) return false;
+	exceptUnit(u);
+	return true;
+}
+bool addressBook::deleteByName(string name) {
 	unit* u = selectByName(name);
-	if (u == NULL) return;
+	if (u == NULL) return false;
 	exceptUnit(u);
+	return true;
 }
-void addressBook::deleteByNumb(string phoneNumber) {
+bool addressBook::deleteByNumb(string phoneNumber) {
 	unit* u = selectByNumb(phoneNumber);
-	if (u == NULL) return;
+	if (u == NULL) return false;
 	exceptUnit(u);
+	return true;
 }
 string addressBook::toString() {
 	string res;
