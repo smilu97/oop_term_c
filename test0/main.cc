@@ -150,6 +150,7 @@ bool test8(phone &p)
 }
 int main(void)
 {
+	srand(time(0));
 	phone p("TESTER", "01012345678"); // create instance
 	if(!test1(p) || !test2(p) || !test3(p) || !test4(p) || !test5(p) ||
 		!test6(p) || !test7(p) || !test8(p)) {
