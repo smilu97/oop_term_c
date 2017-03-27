@@ -46,7 +46,7 @@ bool test2(phone &p)
 }
 bool test3(phone &p)
 {
-	printf("------------------TEST2 START------------------\n");
+	printf("------------------TEST3 START------------------\n");
 	for(int i=0;i<10;++i) {
 		p.createAddress(createRandomString(random(20,30)), createRandomString(11,'0','9'));
 	}
@@ -65,6 +65,7 @@ bool test3(phone &p)
 }
 bool test4(phone &p)
 {
+    printf("------------------TEST4 START------------------\n");
 	p.save("save");
 	printf("Modify \"save\" file in same folder and press any key to continue\n");
 	getchar();
@@ -78,6 +79,7 @@ bool test4(phone &p)
 bool test5(phone &p)
 {
 	char name[65536];
+    printf("------------------TEST5 START------------------\n");
 	printf("Input name: "); scanf("%s", name);
 	string s_name(name);
 	unit* found = p.address.selectByName(s_name);
@@ -88,6 +90,7 @@ bool test5(phone &p)
 bool test6(phone &p)
 {
 	char phoneNumber[65535];
+    printf("------------------TEST6 START------------------\n");
 	printf("Input phone number: "); scanf("%s", phoneNumber);
 	string s_phoneNumber(phoneNumber);
 	unit* found = p.address.selectByNumb(s_phoneNumber);
@@ -98,6 +101,7 @@ bool test6(phone &p)
 bool test7(phone &p)
 {
 	int i=0;
+    printf("------------------TEST7 START------------------\n");
 	for(auto it = p.address.begin(); it != p.address.end(); ++it,++i) {
 		if (i>=15) break;
 		p.smsReceiveCallback(it->second->getPhoneNumber(), createRandomString(100));
@@ -121,7 +125,7 @@ bool test7(phone &p)
 	unit* u = u_it->second;
 	string from = u->getPhoneNumber();
 
-	printf("**************CALL HISTORY of %s*************************\n", u->getName().c_str());
+	printf("**************SMS HISTORY of %s*************************\n", u->getName().c_str());
 	for(auto it = p.sms.find_from(from); it->second->getFrom()==from; ++it) {
 		it->second->print();
 	}
@@ -130,6 +134,7 @@ bool test7(phone &p)
 bool test8(phone &p)
 {
 	int i=0;
+    printf("------------------TEST8 START------------------\n");
 	for(auto it = p.address.begin(); it != p.address.end(); ++it,++i) {
 		if (i>=15) break;
 		p.callReceiveCallback(it->second->getPhoneNumber());
