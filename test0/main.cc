@@ -5,14 +5,14 @@
 
 int random(int from, int to)
 {
-	return rand()%(to-from+1)+from;
+	return rand() % (to - from + 1) + from;
 }
 
-string createRandomString(int length, int from='a', int to='z')
+string createRandomString(int length, int from = 'a', int to = 'z')
 {
 	string res;
-	for(int i=0;i<length;++i) {
-		res.push_back(random(from,to));
+	for(int i = 0; i < length; ++i) {
+		res.push_back(random(from, to));
 	}
 	return res;
 }
@@ -20,8 +20,8 @@ string createRandomString(int length, int from='a', int to='z')
 bool test1(phone &p)
 {
 	printf("------------------TEST1 START------------------\n");
-	for(int i=0;i<20;++i) {
-		p.createAddress(createRandomString(random(20,30)), createRandomString(11,'0','9'));
+	for(int i = 0; i < 20; ++i) {
+		p.createAddress(createRandomString(random(20, 30)), createRandomString(11, '0', '9'));
 	}
 	printf("Created 20 units\n");
 	p.save("save");
@@ -36,6 +36,7 @@ bool test1(phone &p)
 	}
 	return true;
 }
+
 bool test2(phone &p)
 {
 	printf("------------------TEST2 START------------------\n");
@@ -44,10 +45,11 @@ bool test2(phone &p)
 	}	
 	return true;
 }
+
 bool test3(phone &p)
 {
 	printf("------------------TEST3 START------------------\n");
-	for(int i=0;i<10;++i) {
+	for(int i = 0; i < 10; ++i) {
 		p.createAddress(createRandomString(random(20,30)), createRandomString(11,'0','9'));
 	}
 	printf("Created 10 units\n");
@@ -63,6 +65,7 @@ bool test3(phone &p)
 	}
 	return true;
 }
+
 bool test4(phone &p)
 {
     printf("------------------TEST4 START------------------\n");
@@ -76,6 +79,7 @@ bool test4(phone &p)
 	}
 	return true;
 }
+
 bool test5(phone &p)
 {
 	char name[65536];
@@ -87,6 +91,7 @@ bool test5(phone &p)
 	else found->print();
 	return true;
 }
+
 bool test6(phone &p)
 {
 	char phoneNumber[65535];
@@ -98,49 +103,50 @@ bool test6(phone &p)
 	else found->print();
 	return true;
 }
+
 bool test7(phone &p)
 {
-	int i=0;
+	int i = 0;
     printf("------------------TEST7 START------------------\n");
 	for(auto it = p.address.begin(); it != p.address.end(); ++it,++i) {
-		if (i>=15) break;
+		if (i >= 15) break;
 		p.smsReceiveCallback(it->second->getPhoneNumber(), createRandomString(100));
 	}
-	for(int i=0;i<5;++i) {
+	for(int i = 0; i < 5; ++i) {
 		p.smsReceiveCallback(createRandomString(11,'0','9'), createRandomString(100));
 	}
-	i=1;
-	for(auto it = p.address.begin_smst(); it != p.address.end_smst(); ++it) {
+	i = 0;
+	for(auto it = p.address.begin_smst(); it != p.address.end_smst(); ++it, ++i) {
 		printf("%d. %s\n", i, it->second->getName().c_str());
-		++i;
 	}
 	int idx;
 	printf("the number of person to find sms history: "); scanf("%d", &idx);
-	if (i-1 < idx) {
+	if (i - 1 < idx) {
 		printf("Too big index\n");
 		return true;
 	}
 	auto u_it = p.address.begin_smst();
-	for(int i=1;i<idx;++i) ++u_it;
+	for(int i = 1; i < idx; ++i) ++u_it;
 	unit* u = u_it->second;
 	string from = u->getPhoneNumber();
 
 	printf("**************SMS HISTORY of %s*************************\n", u->getName().c_str());
-	for(auto it = p.sms.find_from(from); it->second->getFrom()==from; ++it) {
+	for(auto it = p.sms.find_from(from); it->second->getFrom() == from; ++it) {
 		it->second->print();
 	}
 	return true;
 }
+
 bool test8(phone &p)
 {
-	int i=0;
+	int i = 0;
     printf("------------------TEST8 START------------------\n");
-	for(auto it = p.address.begin(); it != p.address.end(); ++it,++i) {
-		if (i>=15) break;
+	for(auto it = p.address.begin(); it != p.address.end(); ++it, ++i) {
+		if (i >=15) break;
 		p.callReceiveCallback(it->second->getPhoneNumber());
 	}
-	for(int i=0;i<5;++i) {
-		p.callReceiveCallback(createRandomString(11,'0','9'));
+	for(int i = 0; i < 5; ++i) {
+		p.callReceiveCallback(createRandomString(11, '0', '9'));
 	}
 	printf("**************CALL HISTORY*************************\n");
 	for(auto it = p.call.begin(); it != p.call.end(); ++it) {
@@ -153,6 +159,7 @@ bool test8(phone &p)
 	p.save("save");
 	return true;
 }
+
 int main(void)
 {
 	srand(time(0));

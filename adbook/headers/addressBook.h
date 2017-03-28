@@ -23,23 +23,29 @@ public :
 	addressBook(string _name);
 	~addressBook();
 	string getName();
-	// CREATE
+    
+	// CRUD-CREATE
 	void insert(string name, string phoneNumber);
-	// READ
+    
+	// CRUD-READ
 	unit* select(int id);
 	unit* selectByName(string name);
 	unit* selectByNumb(string numb);
-	// UPDATE
+    
+	// CRUD-UPDATE
 	bool updateName(int id, string _name);
 	bool updateNumb(int id, string _numb);
 	bool updateLatestSms(int id, time_t _latestSms);
-	// DELETE
+    
+	// CRUD-DELETE
 	bool deleteById(int id);
 	bool deleteByName(string name);
 	bool deleteByNumb(string phoneNumber);
+    
 	// FILE
 	string toString();
 	void fromString(string raw);
+    
 	// ETC
 	void exceptUnit(unit* u);
 	void save(string path);
