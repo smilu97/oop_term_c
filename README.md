@@ -69,6 +69,10 @@ int main(int argc, char** argv)
 
 [Reference](REFERENCE.md)
 
+## Test
+
+[Test](TEST.md)
+
 ## Author
 
 * 김영진 ( E-mail: smilup2244@gmail.com )
