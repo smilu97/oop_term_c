@@ -1,4 +1,4 @@
-# 객체지향 프로그래밍 Team Project 1
+# 객체지향 프로그래밍 Term Project 1
 
 ## How to build
 
@@ -72,5 +72,5 @@ int main(int argc, char** argv)
 ## Author
 
 * 김영진 ( E-mail: smilup2244@gmail.com )
-* 이재경 ( E-mail: )
+* 이재경 ( E-mail: leeeeeandy@gmail.com)
 
