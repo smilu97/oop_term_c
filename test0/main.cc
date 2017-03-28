@@ -142,7 +142,7 @@ bool test8(phone &p)
 	int i = 0;
     printf("------------------TEST8 START------------------\n");
 	for(auto it = p.address.begin(); it != p.address.end(); ++it, ++i) {
-		if (i >=15) break;
+		if (i >= 15) break;
 		p.callReceiveCallback(it->second->getPhoneNumber());
 	}
 	for(int i = 0; i < 5; ++i) {
