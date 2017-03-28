@@ -105,9 +105,54 @@ MTU::iterator  begin_smst();
 MTU::iterator  end_smst();
 ```
 
-각각 컬럼의 인덱스의 순환 반복자를 반환합니다. 반복자를 이용할 때는 _뒤의 이름의 컬럼을 기준으로 정렬됩니다.
+각각 컬럼의 인덱스의 multimap, map 순환 반복자를 반환합니다. 반복자를 이용할 때는 _뒤의 이름의 컬럼을 기준으로 정렬됩니다.
 
 # callHistory, smsHistory 
 
 addressBook과 매우 유사한 구조를 가지고 있습니다. 자세한 사항은 소스코드를 직접 참조해주세요.
 
+# unit
+
+## Variables
+
+```C
+int id; // Primary Key
+string name; // 이름
+string phoneNumber; // 전화번호
+time_t latestSms; // 마지막으로 문자보낸 날짜
+```
+
+
+
+## 주의
+
+절대로 Setter를 쓰지 마세요. 컨테이너의 Update함수를 사용하세요
+
+# sHistory
+
+## Variables
+
+```C
+int id; // Primary Key
+string from; // 발신자 전화번호
+string content; // 내용
+```
+
+
+
+## 주의
+
+절대로 Setter를 쓰지 마세요. 컨테이너의 Update함수를 사용하세요
+
+# cHistory
+
+## Variables
+
+```C
+int id; // Primary Key
+string from; // 발신자 전화번호
+```
+
+## 주의
+
+절대로 Setter를 쓰지 마세요. 컨테이너의 Update함수를 사용하세요
