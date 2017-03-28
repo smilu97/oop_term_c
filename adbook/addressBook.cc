@@ -1,4 +1,5 @@
 #include "headers/addressBook.h"
+#define BUFFER_SIZE 1024
 
 addressBook::addressBook(string _name) {
 	this->maxId = 0;
@@ -179,7 +180,7 @@ void addressBook::save(string path) {
 
 void addressBook::load(string path) {
 	string data;
-	char buffer[1024];
+	char buffer[BUFFER_SIZE];
 	FILE* fd = fopen(path.c_str(), "rb");
 	while(~fscanf(fd, "%1024s", buffer)) {
 		data.append(buffer);

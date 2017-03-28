@@ -1,4 +1,5 @@
 #include "headers/smsHistory.h"
+#define BUFFER_SIZE 65535
 
 int    sHistory::getId() { return id; }
 
@@ -96,7 +97,7 @@ void smsHistory::load(string path)
 {
 	FILE* fd = fopen(path.c_str(), "r");
 	string data;
-	char buffer[65535];
+    char buffer[BUFFER_SIZE];
 	while(~fscanf(fd, "%65535s", buffer)) {
 		data.append(buffer);
 	}
